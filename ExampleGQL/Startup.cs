@@ -20,7 +20,9 @@ namespace ExampleGQL
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AppDataContext>(opt =>
+            // Enable DI to make multiple instances of DbContext.
+            // Allows for parallel querying.
+            services.AddPooledDbContextFactory<AppDataContext>(opt =>
                 opt.UseInMemoryDatabase(_configuration.GetConnectionString("InMemoryGraphQL")));
 
             services.AddControllers();
