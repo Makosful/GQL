@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using ExampleGQL.Data;
 using ExampleGQL.Entities;
@@ -5,6 +6,7 @@ using ExampleGQL.GraphQL.Commands;
 using ExampleGQL.GraphQL.Platforms;
 using HotChocolate;
 using HotChocolate.Data;
+using HotChocolate.Subscriptions;
 
 namespace ExampleGQL.GraphQL
 {
@@ -12,7 +14,9 @@ namespace ExampleGQL.GraphQL
     {
         [UseDbContext(typeof(AppDataContext))]
         public async Task<AddPlatformPayload> AddPlatformAsync(AddPlatformInput input,
-            [ScopedService] AppDataContext context)
+            [ScopedService] AppDataContext context,
+            [Service] ITopicEventSender eventSender,
+            CancellationToken cancellationToken)
         {
             var platform = new Platform
             {
@@ -20,7 +24,10 @@ namespace ExampleGQL.GraphQL
             };
 
             context.Platforms.Add(platform);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(cancellationToken);
+
+            await eventSender.SendAsync(nameof(Subscription.OnPlatformAdded), platform, cancellationToken);
+            
             return new AddPlatformPayload(platform);
         }
 
