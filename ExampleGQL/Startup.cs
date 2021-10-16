@@ -35,8 +35,9 @@ namespace ExampleGQL
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                using var scope = app.ApplicationServices.CreateScope();
-                var context = scope.ServiceProvider.GetService(typeof(AppDataContext)) as AppDataContext;
+                var factory = app.ApplicationServices.CreateScope()
+                    .ServiceProvider.GetService<IDbContextFactory<AppDataContext>>();
+                using var context = factory?.CreateDbContext();
                 Seed.SeedDatabase(context);
             }
 
