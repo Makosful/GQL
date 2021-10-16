@@ -9,12 +9,16 @@ namespace ExampleGQL.GraphQL
     public class Query
     {
         [UseDbContext(typeof(AppDataContext))] // Parallel query support
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Platform> GetPlatform([ScopedService] AppDataContext context)
         {
             return context.Platforms;
         }
 
         [UseDbContext(typeof(AppDataContext))]
+        [UseFiltering]
+        [UseSorting]
         public IQueryable<Command> GetCommand([ScopedService] AppDataContext context)
         {
             return context.Commands;

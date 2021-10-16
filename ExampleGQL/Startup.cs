@@ -31,7 +31,9 @@ namespace ExampleGQL
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
                 .AddType<PlatformType>()
-                .AddType<CommandType>();
+                .AddType<CommandType>()
+                .AddFiltering()
+                .AddSorting();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
