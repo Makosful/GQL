@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExampleGQL.Entities
@@ -9,5 +10,7 @@ namespace ExampleGQL.Entities
         [Required] public string Name { get; set; }
 
         public string LicenseKey { get; set; }
+
+        public ICollection<Command> Commands { get; set; } = new List<Command>();
     }
 }
