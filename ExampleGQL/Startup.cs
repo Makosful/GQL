@@ -1,5 +1,7 @@
 using ExampleGQL.Data;
 using ExampleGQL.GraphQL;
+using ExampleGQL.GraphQL.Commands;
+using ExampleGQL.GraphQL.Platforms;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +30,8 @@ namespace ExampleGQL
             services.AddControllers();
             services.AddGraphQLServer()
                 .AddQueryType<Query>()
-                .AddProjections();
+                .AddType<PlatformType>()
+                .AddType<CommandType>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
