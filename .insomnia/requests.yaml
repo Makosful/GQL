@@ -1,0 +1,273 @@
+_type: export
+__export_format: 4
+__export_date: 2021-10-16T14:15:42.650Z
+__export_source: insomnia.desktop.app:v2021.5.3
+resources:
+  - _id: wrk_32d85eab3f6d4c7c9188a7e740166561
+    parentId: null
+    modified: 1634334697480
+    created: 1634334697480
+    name: GraphQL
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: spc_53ea83a749bc493ab9a8582b3f217bbc
+    parentId: wrk_32d85eab3f6d4c7c9188a7e740166561
+    modified: 1634334697482
+    created: 1634334697482
+    fileName: GraphQL
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_352c5a214c42cab0ab05a221d5b83e640a9771d3
+    parentId: wrk_32d85eab3f6d4c7c9188a7e740166561
+    modified: 1634393724942
+    created: 1634334697488
+    name: Base Environment
+    data:
+      host: http://localhost:5000
+    dataPropertyOrder:
+      "&":
+        - host
+    color: null
+    isPrivate: false
+    metaSortKey: 1634334697488
+    _type: environment
+  - _id: fld_a408529082e8435488e173501ba47b00
+    parentId: wrk_32d85eab3f6d4c7c9188a7e740166561
+    modified: 1634387376475
+    created: 1634387364429
+    name: Queries
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1634386055157
+    _type: request_group
+  - _id: req_84d27964527043cfa5b54da6a3a69707
+    parentId: fld_a408529082e8435488e173501ba47b00
+    modified: 1634393737090
+    created: 1634386055062
+    url: "{{ _.host }}/graphql"
+    name: Filter Query
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  command(where: {platformId: {eq: 1}})
+        {\n    id\n    platform{\n      id\n      name\n    }\n    commandLine\n    howTo\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_b2fa9f7a36694c518e7839679fc78fc1
+    authentication: {}
+    metaSortKey: -1634386055182
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_fae9755bf5d2425ba71cb73625a19f17
+    parentId: fld_a408529082e8435488e173501ba47b00
+    modified: 1634387674272
+    created: 1634386224399
+    url: "{{ _.host }}/graphql"
+    name: Sorting Query
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  platform(order: {name: ASC})
+        {\n    name\n  }\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_b2fa9f7a36694c518e7839679fc78fc1
+    authentication: {}
+    metaSortKey: -1634386055132
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_9ef27f0dd9e54b999b3a2e46aa370ebf
+    parentId: fld_a408529082e8435488e173501ba47b00
+    modified: 1634387676895
+    created: 1634380745704
+    url: "{{ _.host }}/graphql"
+    name: Get Commands
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query{\n  command{\n    howTo\n    commandLine\n    platform{\n      name\n    }\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_5eaf1ac594fb4270bc984500e4c158a8
+    authentication: {}
+    metaSortKey: -1634386055082
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_b5f7f00f479c496f932a274f2acc47a7
+    parentId: fld_a408529082e8435488e173501ba47b00
+    modified: 1634387679404
+    created: 1634380007845
+    url: "{{ _.host }}/graphql"
+    name: Get Platforms and Commands
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query {\n  platform {\n    id\n    name\n    commands
+        {\n      id\n      howTo\n      commandLine\n    }\n  }\n}\n"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_bd168b8e6c3d48228172b49fa8da8c5e
+    authentication: {}
+    metaSortKey: -1634386055032
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_1c6d0b3bb1cd47e1ac30eda4124bb701
+    parentId: fld_a408529082e8435488e173501ba47b00
+    modified: 1634387681996
+    created: 1634376553043
+    url: "{{ _.host }}/graphql"
+    name: Parallel Platforms
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query{\n  a: platform{\n    id\n    name\n  }\n  b:
+        platform{\n    id\n    name\n  }\n  c:
+        platform{\n    id\n    name\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_75ef4bf6947d46df9aa901cb4f5700cc
+    authentication: {}
+    metaSortKey: -1634386054982
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_bc5f5a7c41544038b989a15e120a2838
+    parentId: fld_a408529082e8435488e173501ba47b00
+    modified: 1634389459798
+    created: 1634334737441
+    url: "{{ _.host }}/graphql"
+    name: Get Platforms
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"query{\n  platform{\n    id\n    name\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_70cbc1dc405a4a8faca6c82b49a926ec
+    authentication: {}
+    metaSortKey: -1634386054932
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_4bdcb7b55d064fef826103a00227a6d3
+    parentId: wrk_32d85eab3f6d4c7c9188a7e740166561
+    modified: 1634387397059
+    created: 1634387370033
+    name: Mutations
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1634386055107
+    _type: request_group
+  - _id: req_d1b3dd52c2784a82bd53bb82d5538eb7
+    parentId: fld_4bdcb7b55d064fef826103a00227a6d3
+    modified: 1634393505850
+    created: 1634387405452
+    url: "{{ _.host }}/graphql"
+    name: Add Platform
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  addPlatform(input: {\n    name: \"Manjaro\"\n  })
+        {\n    platform {\n      id\n      name\n    }\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0e9fbaec846e4a05a8ad0dbb4bd5c79d
+    authentication: {}
+    metaSortKey: -1634387405452
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: req_ea055556bd0241dbb2e47cafd3dd9469
+    parentId: fld_4bdcb7b55d064fef826103a00227a6d3
+    modified: 1634390138902
+    created: 1634388433698
+    url: "{{ _.host }}/graphql"
+    name: Add Command
+    description: ""
+    method: POST
+    body:
+      mimeType: application/graphql
+      text: '{"query":"mutation {\n  addCommand (input: {\n    howTo: \"Perform
+        directory listing\"\n    commandLine: \"ls\"\n    platformId:
+        4\n  }){\n    command
+        {\n      id\n      howTo\n      commandLine\n      platform
+        {\n        id\n        name\n      }\n    }\n  }\n}"}'
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_0e9fbaec846e4a05a8ad0dbb4bd5c79d
+    authentication: {}
+    metaSortKey: -1634386730317
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
